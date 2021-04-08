@@ -1,6 +1,8 @@
 package vin
 
-func Manufacturer(vin string) string {
+type VIN string
+
+func (vin VIN) Manufacturer() string {
 
 	manufacturer := vin[:3]
 	// if the last digit of the manufacturer ID is a 9
@@ -9,5 +11,5 @@ func Manufacturer(vin string) string {
 		manufacturer += vin[11:14]
 	}
 
-	return manufacturer
+	return string(manufacturer)
 }
