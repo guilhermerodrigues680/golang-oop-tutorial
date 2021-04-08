@@ -7,17 +7,13 @@ import (
 
 const euSmallVIN = "W09000051T2123456"
 
-func TestVIN_EU_SmallManufacturer_Polymorphism(t *testing.T) {
+func TestVIN_EU_SmallManufacturer(t *testing.T) {
 
-	var testVINs []vin.VIN
-	testVIN, _ := vin.NewVINEU(euSmallVIN)
-	// now there is no need to cast!
-	testVINs = append(testVINs, testVIN)
+	service := vin.NewVINService(&vin.VINServiceConfig{})
+	testVIN, _ := service.CreateFromCode(euSmallVIN)
 
-	for _, vin := range testVINs {
-		manufacturer := vin.Manufacturer()
-		if manufacturer != "W09123" {
-			t.Errorf("unexpected manufacturer %s for VIN %s", manufacturer, testVIN)
-		}
+	manufacturer := testVIN.Manufacturer()
+	if manufacturer != "W09123" {
+		t.Errorf("unexpected manufacturer %s for VIN %s", manufacturer, testVIN)
 	}
 }
