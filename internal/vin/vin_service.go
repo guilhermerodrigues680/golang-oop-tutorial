@@ -1,21 +1,13 @@
 package vin
 
 type VINService struct {
-	client *VINAPIClient
+	client VINAPIClient
 }
 
-type VINServiceConfig struct {
-	APIURL string
-	APIKey string
-	// more configuration values
-}
+type VINServiceConfig struct{}
 
-func NewVINService(config *VINServiceConfig) *VINService {
-
-	// use config to create the API client
-	apiClient := NewVINAPIClient(config.APIURL, config.APIKey)
-
-	return &VINService{apiClient}
+func NewVINService(config *VINServiceConfig, apiClient VINAPIClient) *VINService {
+	return &VINService{client: apiClient}
 }
 
 func (s *VINService) CreateFromCode(code string) (VIN, error) {

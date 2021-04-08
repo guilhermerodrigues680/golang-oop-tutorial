@@ -1,17 +1,21 @@
 package vin
 
-type VINAPIClient struct {
+type VINAPIClient interface {
+	IsEuropean(code string) bool
+}
+
+type vinAPIClient struct {
 	apiURL string
 	apiKey string
-	// ... internals go here ...
+	// .. internals go here ...
 }
 
-func NewVINAPIClient(apiURL, apiKey string) *VINAPIClient {
+func NewVinAPIClient(apiURL, apiKey string) *vinAPIClient {
 
-	return &VINAPIClient{apiURL, apiKey}
+	return &vinAPIClient{apiURL, apiKey}
 }
 
-func (client *VINAPIClient) IsEuropean(code string) bool {
+func (client *vinAPIClient) IsEuropean(code string) bool {
 
 	// calls external API and returns correct value
 	return true
