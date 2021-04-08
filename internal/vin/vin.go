@@ -1,6 +1,17 @@
 package vin
 
+import "fmt"
+
 type VIN string
+
+func NewVIN(code string) (VIN, error) {
+
+	if len(code) != 17 {
+		return "", fmt.Errorf("invalid VIN %s: more or less than 17 characters", code)
+	}
+
+	return VIN(code), nil
+}
 
 func (vin VIN) Manufacturer() string {
 
